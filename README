@@ -1,0 +1,33 @@
+CS 3304
+Project 2
+Joseph Bambery
+
+My implementation of the Bitwise calculator follows a very similar outline to the
+project specification.
+
+My solution does not check for hex values that have a value greater than 16; i.e.
+"FF" will not be parsed correctly, each parsed hex value is one digit. I did this
+based on the test cases we were given.
+
+My solution has 2 relevant global variables, and two global variables to hold the
+file pointer for the "input.txt" file and the desired output file. I assumed
+that this was ok, because the variable was just a file, and not used in computing
+the result of the expressions. However, if these variables do count against me,
+I would like to defend the output file pointer as completely optional global
+variable because,  in the normal invocation of the function, it defaults to stdout.
+
+Other notes about my implementation:
+ - I have an enum "Token" that identifies each valid character in a given string.
+
+ - get_next_token() gets then next token from the file and prints each character
+   in a file as it is parsed.
+
+ - I have included a "parser.h" file with a declaration of "E()" in order to
+   silence the warning about implicit function declarations for the recursive
+   call to "E()" in "C()".
+
+ - Also included, is a Makefile for an easy compilation of the project in a local
+   environment.
+
+ - Lastly, to run the program to a custom output file, you can use:
+   ./parser [output file name]

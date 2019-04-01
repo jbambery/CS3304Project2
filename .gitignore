@@ -1,0 +1,5 @@
+.vscode/
+*.o
+parser
+.DS_Store
+*.tar
