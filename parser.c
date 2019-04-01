@@ -10,13 +10,13 @@ enum Token {
 
 int HexNumber;        // Holds the most recently parsed hex value
 enum Token Operator;  // Holds the most recent operator
-FILE *in_file, *out_file;       // Input file pointer
+FILE *in_file;       // Input file pointer
 
 // Function that parses the next token in the character string
 enum Token get_next_token() {
   char current_token = fgetc(in_file);
   if (current_token != EOF && current_token != '\n') {  // Print current character to screen
-    fprintf(out_file, "%c", current_token);
+    printf("%c", current_token);
   }
   switch (current_token) {
     case '|':
@@ -131,12 +131,6 @@ int main(int argc, char* argv[]) {
   // Input file
   in_file = fopen("input.txt", "r");
 
-  if (argc > 1) {     // Open desired file
-    out_file = fopen(argv[1], "w+");
-  } else {            // Print to stdout
-    out_file = stdout;
-  }
-
   int val;
 
   Operator = get_next_token();        // First call to get_next_token
@@ -144,7 +138,7 @@ int main(int argc, char* argv[]) {
     if (Operator != NEW_LINE) {       // Account for empty line
       val = E();                      // Begin recursive descent
       if (Operator == NEW_LINE) {
-        fprintf(out_file, " = %x \n", val&0xf);      // Print result
+        printf(" = %x \n", val&0xf);      // Print result
         Operator = get_next_token();
       } else {
         HexNumber = val;  // Sets hexnumber for future calculation
